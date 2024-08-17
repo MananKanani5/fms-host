@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | VJTI | Fess Mangement</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/images/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div id="home" class="d-flex">
+        <div class="left-home d-flex justify-center flex-column">
+            <h5 class="sub-title">Welcome to</h5>
+            <h1 class="main-title">VJTI College</h1>
+        </div>
+        <div class="right-home d-flex flex-column align-items-center justify-between">
+            {% if messages %}
+                {% for messages in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{messages}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                {% endfor %}
+            {% endif %}
+            <img src="../static/images/logo.png" class="logo">
+            <form action="" method="post" class="d-flex flex-column gap-15">
+                {% csrf_token %}
+                <input type="ID" name="ID" id="" placeholder="ID">
+                <input type="password" name="password" id="" placeholder="Password">
+                <input type="submit" value="Login" class="btn-primary mt-20">
+            </form> 
+            <p>© Veermata Jijabai Technological Institute (VJTI)</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    font-family: poppins;
+}
+
+:root{
+    --primary-color:#FF8937;
+    --secondary-color:#14238A;
+    --text-color:#202020;
+    --light-bg:#f4f4f4;
+    --gradient: linear-gradient(180deg, rgba(234,104,89,1) 0%, rgba(254,135,57,1) 100%);
+    --gradient-hover: linear-gradient(180deg, rgba(254,135,57,1) 0%, rgba(254,135,57,1) 100%);
+}
+
+.d-flex{
+    display: flex ;
+}
+.flex-column{
+    flex-direction: column;
+}
+
+.justify-center{
+    justify-content: center;
+}
+.justify-between{
+    justify-content: space-between;
+}
+.align-items-center{
+    align-items: center;
+}
+
+.gap-10{
+    gap: 10px;
+}
+.gap-15{
+    gap: 15px;
+}
+.gap-20{
+    gap: 20px;
+}
+p, input{
+    font-size: 14px;
+}
+
+input[type="email"]{
+    width: -webkit-fill-available;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--light-bg);
+    
+}
+input[type="password"]{
+    width: -webkit-fill-available;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--light-bg);
+
+}
+
+.btn-primary{
+    background: var(--gradient);
+    color: var(--light-bg);
+    text-decoration: none;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: background-image .3s ease-in-out;
+    cursor: pointer;
+}
+.btn-primary:hover{
+    background: var(--gradient-hover);
+}
+
+
+/* Home Starts */
+
+#home .left-home{
+    background-image: url("../images/hero_bg.jpg") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 50%;
+    color: var(--light-bg);
+    padding-left: 20px;
+}
+#home .left-home .sub-title{
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+#home .left-home .main-title{
+    font-size: 60px;
+    text-transform: uppercase;
+}
+
+#home .right-home{
+    width: 50%;
+    background-color: var(--light-bg);
+    padding:50px 0 40px 0 ;
+}
+#home .right-home .logo{
+    width: 100px;
+}
+
+#home form{
+    width: 35%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 50px 40px 50px 40px;
+    box-shadow: 0 15px 30px  #00000020;
+}
+#home form input[type="submit"]{
+    margin-top: 15px;
+}
+#home form .forget-pass{
+    text-decoration: none;
+    color: var(--secondary-color);
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+
+/* Home Ends */
+
+
+
+/* Dashboard Starts */
+
+.nav{
+    background: var(--gradient);
+    width: 20%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.right-content{
+    width: 75%;
+    background-color: var(--light-bg);
+}
+
+.nav .logo{
+    width: 150px;
+    height: 100px;
+}
+/* nav{
+    width: 100%;
+} */
+nav{
+    list-style: none;
+}
+nav li{
+    padding: 9px 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+nav .active{
+    background-color: #ffffff;
+    padding: 9px 30px;
+    border-radius: 5px;
+}
+nav .active a {
+    color: #202020;
+}
+nav li a{
+    text-decoration: none;
+    color: #ffffff;
+}
+nav li a i{
+    margin-right: 10px;
+    font-size: 16px;
+}
+.time{
+    color: var(--light-bg);
+}
+
+
+.right-content .analytics .ana{
+    background-color: white;
+    margin: 50px;
+    border-radius: 15px;
+    width: -webkit-fill-available;
+    text-align: center;
+    padding: 20px;
+}
+
+
+    
+
+/* Dashboard Ends */

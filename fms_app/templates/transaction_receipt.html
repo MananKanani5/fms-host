@@ -1,0 +1,398 @@
+
+<!-- 
+    <head>
+        <link rel="shortcut icon" href="../static/images/logo.png" type="image/x-icon">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      
+    </head> -->
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+        <title>Transactions | Student | VJTI</title>
+        <link rel="stylesheet" href="../../../static/css/style.css">
+        {% comment %} <link rel="stylesheet" href="../../../static/css/receipt.css"> {% endcomment %}
+    
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+            integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+        <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+    
+    </head>
+    
+    <body>
+        <div class="back">
+            <div class="wrapper">
+                <!-- Sidebar Holder -->
+                <nav id="sidebar">
+                    <div class="sidebar-header nav">
+                        <img src="../../../static/images/logo.png" class="logo">
+                    </div>
+
+                    {% if user.is_staff %}
+                    <ul class="list-unstyled components">
+                        <li>
+                            <a href="/admin_dashboard" class="btn"><i class="ri-dashboard-fill"></i> Dashboard</a>
+                        </li>
+                        <li >
+                            <a href="/students" class="btn"><i class="ri-graduation-cap-fill"></i> Students</a>
+                        </li>
+                        <li>
+                            <a href="/fees_details" class="btn"><i class="ri-graduation-cap-fill"></i> Fee Details</a>
+                        </li>
+                        <!-- <li>
+                            <a href="fees_structure.html" class="btn"><i class="ri-file-chart-fill"></i> Fee Structure</a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn"><i class="ri-file-chart-fill"></i> Add new structure</a>
+                        </li> -->
+                        <li class="active">
+                            <a href="/reports" class="btn"><i class="ri-file-chart-fill"></i> Transactions</a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="list-unstyled components">
+                        <li >
+                            <a href="/student_dashboard" class="btn"><i class="ri-dashboard-fill"></i> Dashboard</a>
+                        </li>
+                        
+                        <li >
+                            <a href="/student_fees_structure" class="btn"><i class="ri-information-line"></i> Fee Structure</a>
+                        </li>
+                        <li >
+                            <a href="/fees_payment" class="btn"><i class="ri-refund-line"></i> Fee Payment</a>
+                        </li>
+                        <li class="active">
+                            <a href="/student_transactions" class="btn"><i class="ri-history-line"></i> Transactions</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+
+                    <ul class="list-unstyled CTAs align-items-center justify-between">
+                        <li>
+                            <p class="time">
+                                <script>document.write(new Date().toLocaleTimeString());</script>
+                            </p>
+                            <p class="time">
+                                <script>document.write(new Date().toLocaleString('en-us', { day: 'numeric', month: 'short', year: 'numeric' }));</script>
+                            </p>
+                        </li>
+    
+                    </ul>
+                </nav>
+                
+                <!-- Page Content Holder -->
+                <div id="content">
+    
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+    
+                            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
+                                data-toggle="collapse" data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fas fa-align-justify"></i>
+                            </button>
+    
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="nav navbar-nav ml-auto">
+                                    <!-- <li class="nav-item active">
+                                        <a class="nav-link" href="#">Page</a>
+                                    </li> -->
+                                    {% comment %} <li class="nav-item dropdown">
+                                        <a class=" nav-link  " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"  aria-expanded="false">
+                                            <i class="ri-notification-3-fill"></i>
+                                         Notifications
+                                        </a>
+                                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                          <li><a class="dropdown-item" href="#">Action</a></li>
+                                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                                          <li><hr class="dropdown-divider"></li>
+                                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                              </li> {% endcomment %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/user_logout"><i class="ri-logout-box-r-line"></i> Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                
+                    <div class="right-content ">
+                     
+                        <div class="page-title">
+                            <h2>Receipt</h2>
+                            <hr class="orange">
+                        </div>
+                        <div class="fee_card" id="printableArea">
+    
+                            <div class="container bootstrap snippets bootdey">
+                                        
+                                <button class="btn btn-top" id="printPageButton" onClick="printPageArea('printableArea')"> 
+                                    <i class="fa fa-print"></i>
+                                    Print this receipt
+                                </button>   
+                                <div class="fee_card">
+                                    <div class="receipt">                                       
+            
+                                    <img src="../../../static/images/logo.png" class="logo">
+                                    <h5 class="text-left" style="font-size:22px;">Veermata Jijabai Technology of Institute</h5>
+                                    <h6 class="text-left" style="font-size:22px;">H.R. Mahajani Road, Matunga, Mumbai-400091 </h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {% for transaction in transactionData %}
+                                        <div class="invoice-wrapper">
+                        
+                                            <div class="payment-info">
+                                                
+                                                <div class="row">
+                                                    <div class="col-sm-5 text-left">
+                                                        <span style="font-size:20px;">SBCollect Reference No.:</span>
+                                                        <strong style="font-size:20px;">{{transaction.TransactionId}}</strong>
+                                                    </div>
+                                                    <div class="col-sm-7 text-right">
+                                                        <span style="font-size:20px;">Payment Date & Time:</span>
+                                                        <strong style="font-size:20px;">{{transaction.DateTime}}</strong>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                            <hr/>
+                                            {% for student in studentData %}
+                                            <div class="payment-details">
+                                                <p class="text-primary text-center" style="font-size:24px;">Student Details</p><br>
+                                                <div class="row">
+                                                    
+                                                    <div class="col-sm-4 text-left">
+                                                        <span style="font-size:18px;">Student Name:</span>
+                                                        <strong style="font-size:18px;">
+                                                            {{student.Name}}
+                                                        </strong>
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                        <span style="font-size:18px;">Date of Birth:</span>
+                                                        <strong style="font-size:18px;">
+                                                            {{student.DOB}}
+                                                        </strong>
+                                                    </div>
+                                                    <div class="col-sm-4 text-right">
+                                                        <span style="font-size:18px;">Caste Category:</span>
+                                                        <strong style="font-size:18px;">
+                                                            {{student.CasteCategory}}
+                                                        </strong>
+                                                    </div>
+                                                    <div class="col-sm-4 text-left">
+                                                        <span style="font-size:18px;">Program:</span>
+                                                        <strong style="font-size:18px;">
+                                                            {{student.Course}}
+                                                        </strong>
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                        <span style="font-size:18px;">Academic Year:</span>
+                                                        <strong style="font-size:18px;">
+                                                            {{student.AcademicYear}}
+                                                        </strong>
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-4 text-right">
+                                                        <span style="font-size:18px;">Department:</span>
+                                                        <strong style="font-size:18px;">
+                                                            {{student.Department}}
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}  
+                                            <hr/>
+                        
+                                            <div class="line-items">
+                                                <div class="headers clearfix">
+                                                    <p class="text-primary text-center" style="font-size:24px;">Fee Structure</p><br>
+                                                    <div class="row">
+                                                        <div class="col-sm-6 text-left" style="font-size:26px;">
+                                                            <strong>Fee Description </strong>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right" style="font-size:26px;">
+                                                            <strong> Amount (in ₹) </strong>
+                                                        </div>
+                                                    </div>
+                                                    <br/>
+                                                </div>
+                                                {% for data in feesData %}
+                                                <div class="items">
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;">Development Fee</span>
+                                                        </div>
+                                                       
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span>{{data.DevelopmentFees }}</span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.DevelopmentFees transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;"> Student Insurance </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.StudentInsurance}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.StudentInsurance transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;"> Contingency  </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.Contingency}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.Contingency transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;"> Other Fees  </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.OtherFees}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.OtherFees transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;">Tuition Fee </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.TutionFees}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.TutionFees transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;"> Exam Fees  </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.ExamFees}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.ExamFees transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;">Deposit And Caution Money </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.DepositAndCautionMoney}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.DepositAndCautionMoney transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;"> Alumni Association Life Membership Fees  </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.AlumniAssociationLifeMembershipFees}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.AlumniAssociationLifeMembershipFees transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-left">
+                                                            <span style="font-size:22px;">Convocation Fees </span>
+                                                        </div>
+                                                        <div class="col-sm-6 text-right">
+                                                            {% comment %} <span> {{data.ConvocationFees}} </span> {% endcomment %}
+                                                            <span style="font-size:22px;">{% widthratio data.ConvocationFees transaction.TransactionTypeId 1 %}</span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <hr/>
+                                                <div class="row">
+                                                    <div class="col-sm-6 text-left">
+                                                        <strong style="font-size:24px;">Total Fees (in Figures)</strong>
+                                                    </div>
+                                                    <div class="col-sm-6 text-right">
+                                                        <strong style="font-size:24px;"> ₹.{{transaction.Amount}}/- </strong>
+                                                        {% comment %} <strong> ₹.{% widthratio data.TotalFee transaction.FeesTypeId 1 %}/- </strong> {% endcomment %}
+                                                    </div>
+                                                    {% comment %} <div class="col-sm-6">
+                                                        <strong>Total Fees (in Words)</strong>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <strong> {{data.TotalFee}}
+                                                        </strong>
+                                                    </div> {% endcomment %}
+                                                </div>        
+                                                {% endfor %}                                      
+                                                
+                                                <div class="print">
+                                                    <button class="btn btn-warning" id="printPageButton" onClick="printPageArea('printableArea')"> 
+                                                        <i class="fa fa-print"></i>
+                                                        Print this receipt
+                                                    </button>                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                                              
+                        </div>
+    
+                        <div class="footer">
+                            <p>2024 <i class="ri-copyright-line"></i> Veermata Jijabai Technological Institute (VJTI)</p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <!-- Popper.JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+
+    <!-- CSS for the things we want to print (print view) -->
+        <style type="text/css" media="print">
+            .printableArea{
+                    zoom: 2%;
+                }
+            .fee_card{
+                    background-color:red;
+                }
+        </style>
+    
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                    $(this).toggleClass('active');
+                });
+            });
+
+            function printPageArea(areaID){
+                var printContent = document.getElementById(areaID).innerHTML;
+                var originalContent = document.body.innerHTML;
+                document.body.innerHTML = printContent;
+                window.print();
+                document.body.innerHTML = originalContent;
+            }
+        </script>
+    </body>
+    
+    </html>

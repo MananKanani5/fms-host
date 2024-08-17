@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Fees Payment | Student | VJTI</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="back">
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header nav">
+                    <img src="../../static/images/logo.png" class="logo">
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li >
+                        <a href="/student_dashboard" class="btn"><i class="ri-dashboard-fill"></i> Dashboard</a>
+                    </li>
+                    
+                    <li >
+                        <a href="/student_fees_structure" class="btn"><i class="ri-information-line"></i> Fee Structure</a>
+                    </li>
+                    <li class="active">
+                        <a href="/fees_payment" class="btn"><i class="ri-refund-line"></i> Fee Payment</a>
+                    </li>
+                    <li>
+                        <a href="/student_transactions" class="btn"><i class="ri-history-line"></i> Transactions</a>
+                    </li>
+                   <!-- <li>
+                        <a href="#" class="btn"><i class="ri-file-chart-fill"></i> Receipt</a>
+                    </li>  -->
+                </ul>
+
+                <ul class="list-unstyled CTAs align-items-center justify-between">
+                    <li>
+                        <p class="time">
+                            <script>document.write(new Date().toLocaleTimeString());</script>
+                        </p>
+                        <p class="time">
+                            <script>document.write(new Date().toLocaleString('en-us', { day: 'numeric', month: 'short', year: 'numeric' }));</script>
+                        </p>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="navbar-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
+                            data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-align-justify"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <!-- <li class="nav-item dropdown">
+                                    <a class=" nav-link  " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"  aria-expanded="false">
+                                        <i class="ri-notification-3-fill"></i>
+                                     Notifications
+                                    </a>
+                                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                      <li><a class="dropdown-item" href="#">Action</a></li>
+                                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                                      <li><hr class="dropdown-divider"></li>
+                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/user_logout"><i class="ri-logout-box-r-line"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                
+
+                <div class="right-content">
+                    <div class="page-title">
+                        <h2>Fees Payment</h2>
+                <hr class="orange">
+                    </div>
+
+                    {% if changed %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Data updated successfully !!!</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    {% endif %}
+                    
+                    <div class="fee_card">
+                        <table class="table">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th>Total Fees</th>
+                                        <td scope="col">Rs. {{user.studentdetail.TotalFees}}/-</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fees Paid</th>
+                                        <td scope="col">Rs. {{user.studentdetail.PaidFees}}/-</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Outstanding Fees</th>
+                                        <td scope="col">Rs. {{user.studentdetail.RemainingFees}}/-</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                                <div class="d-flex justify-between">
+                                    <form action="{% url 'fees_payment' %}" method="POST" class="d-flex gap-20">
+                                        {% csrf_token %}
+                                        <select class="custom-select" id="feesID" name="feesID" required>
+                                            <option id="selectFees" value="">Select number of installments</option>
+                                            {% if user.studentdetail.RemainingFees != 0 %}
+                                                <option value={{user.studentdetail.RemainingFees}} > {{user.studentdetail.RemainingFees}}</option>
+                                            {% endif %}
+                                            {% if user.studentdetail.TotalFees == user.studentdetail.RemainingFees %}
+                                            {% comment %} Below is workaround for division in templates {% endcomment %}
+                                                
+                                            <option value={% widthratio user.studentdetail.RemainingFees 2 1 %}  >{% widthratio user.studentdetail.RemainingFees 2 1 %}</option>
+                                            {% endif %}
+                                        </select>
+                                        {% if user.studentdetail.RemainingFees != 0 %}
+                                        <button type="submit" class="btn btn-orange " >Proceed to Pay</button>
+                                        {% endif %}
+                                </form>
+                                </div>
+                                
+                                    {% if razorpay_order_id != none %}
+                                    <!-- Razorpay's Javascript code. -->
+                                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                    <script>
+                                        var options = {
+                                            // Enter the Key ID generated from the Dashboard
+                                            key: "{{ razorpay_merchant_key }}", 
+                                            // Amount is in currency subunits.
+                                            // Default currency is INR. Hence, 
+                                            // 50000 refers to 50000 paise
+                                            amount: "{{ razorpay_amount }}", 
+                                            currency: "{{ currency }}",
+                                            image: "https://vjti.ac.in/wp-content/uploads/oldupload/cropped-New-VJTI-Logo_1-1-208x300.jpg",
+                                            prefill:{
+                                                "name":"{{ user.studentdetail.Name }}"
+                                            },
+                                            theme:{
+                                                "color":"#F37254"
+                                            },
+                                            // Your/store name.
+                                            name: "V.J.T.I.", 
+                                            // Pass the `id` obtained in the response of Step 1
+                                            order_id: "{{ razorpay_order_id }}",
+                                            callback_url: "{{ callback_url }}",
+                                            handler: function(response) {
+                                                // Handle the payment success response
+                                                let TransactionTypeId = 0;
+                                                if({{razorpay_amount}} == {{user.studentdetail.TotalFees}}){
+                                                    TransactionTypeId  = 1;
+                                                }else{
+                                                    TransactionTypeId = 2;
+                                                }
+                                                response.TransactionTypeId = TransactionTypeId;
+                                                response.Amount = {{razorpay_amount}};
+                                                response.Method = "Razorpay";
+                                                response.RemainingFees = {{user.studentdetail.RemainingFees}} - {{razorpay_amount}};
+                                                response.PaidFees = {{user.studentdetail.PaidFees}} + {{razorpay_amount}};
+                                                
+                                                window.location.href = "{% url 'fees_payment_success' %}?response=" + encodeURIComponent(JSON.stringify(response));
+                                            },
+                                        };
+                                        // initialise razorpay with the options.
+                                        var rzp1 = new Razorpay(options);
+                                        rzp1.on('payment.failed', function (response){
+                                            let TransactionTypeId = 0;
+                                            if({{razorpay_amount}} == {{user.studentdetail.TotalFees}}){
+                                                TransactionTypeId  = 1;
+                                            }else{
+                                                TransactionTypeId = 2;
+                                            }
+                                            response.TransactionTypeId = TransactionTypeId;
+                                            response.Amount = {{razorpay_amount}};
+                                            response.Method = "Razorpay";
+                                            response.Status = 1;
+                                            response.RemainingFees = {{user.studentdetail.TotalFees}} - {{razorpay_amount}};
+                                            response.PaidFees = {{user.studentdetail.PaidFees}} - {{razorpay_amount}};
+                                            window.location.href = "{% url 'fees_payment_failure' %}?response=" + encodeURIComponent(JSON.stringify(response));
+                                        });
+
+                                        // add event listener to the payment button.
+                                        rzp1.open();
+                                        e.preventDefault();
+                                    </script>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <p>2024 <i class="ri-copyright-line"></i> Veermata Jijabai Technological Institute (VJTI)</p>
+                                </p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Transactions | Student | VJTI</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="back">
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header nav">
+                    <img src="../../static/images/logo.png" class="logo">
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li >
+                        <a href="/student_dashboard" class="btn"><i class="ri-dashboard-fill"></i> Dashboard</a>
+                    </li>
+                    
+                    <li >
+                        <a href="/student_fees_structure" class="btn"><i class="ri-information-line"></i> Fee Structure</a>
+                    </li>
+                    <li >
+                        <a href="/fees_payment" class="btn"><i class="ri-refund-line"></i> Fee Payment</a>
+                    </li>
+                    <li class="active">
+                        <a href="/student_transactions" class="btn"><i class="ri-history-line"></i> Transactions</a>
+                    </li>
+                    <!-- <li>
+                        <a href="receipt.html" class="btn"><i class="ri-file-chart-fill"></i> Receipt</a>
+                    </li> -->
+                </ul>
+
+                <ul class="list-unstyled CTAs align-items-center justify-between">
+                    <li>
+                        <p class="time">
+                            <script>document.write(new Date().toLocaleTimeString());</script>
+                        </p>
+                        <p class="time">
+                            <script>document.write(new Date().toLocaleString('en-us', { day: 'numeric', month: 'short', year: 'numeric' }));</script>
+                        </p>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="navbar-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
+                            data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-align-justify"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <!-- <li class="nav-item dropdown">
+                                    <a class=" nav-link  " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"  aria-expanded="false">
+                                        <i class="ri-notification-3-fill"></i>
+                                     Notifications
+                                    </a>
+                                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                      <li><a class="dropdown-item" href="#">Action</a></li>
+                                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                                      <li><hr class="dropdown-divider"></li>
+                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/user_logout"><i class="ri-logout-box-r-line"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                
+
+                <div class="right-content">
+                    <div class="page-title">
+                        <h2>Transactions</h2>
+                <hr class="orange">
+                    </div>
+                    <div class="fee_card">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">Transaction ID</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Method</th>
+                                <th scope="col">Date , Time</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Full Details</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% if transactionData %}
+                                    {% for data in transactionData %}
+                                    <tr>
+                                    <th scope="row">{{data.TransactionId}}</th>
+                                    <td>{{data.Amount}}/-</td>
+                                    <td>{{data.Method}}</td>
+                                    <td>{{data.DateTime}}</td>
+                                    {% if data.Status == "Success" %}
+                                    <td class="txt_success">{{data.Status}}</td>                                
+                                    {% elif data.FeesStatus == "Partial" %}
+                                    {% else %}
+                                    <td class="txt_danger">{{data.Status}}</td>  
+                                    {% endif %}
+                                    <td>
+                                        {% if data.Status == "Success" %}
+                                        <a href="{% url 'transaction_receipt' data.UserId data.FeesTypeId data.TransactionId %}" class="txt_warning txt_underline">View</a></td>
+                                            {% comment %} <a href="/receipt" class="txt_warning txt_underline">View</a></td> {% endcomment %}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">No transactions found</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="footer">
+                        <p>2024 <i class="ri-copyright-line"></i> Veermata Jijabai Technological Institute (VJTI)</p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
